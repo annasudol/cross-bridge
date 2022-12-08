@@ -2,7 +2,6 @@ import { expect } from "chai";
 import { ethers } from "hardhat";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { Bridge__factory, TokenErc20__factory, Bridge, TokenErc20 } from "../typechain-types";
-import { token } from "../typechain-types/@openzeppelin/contracts";
 
 describe("Bridge", function () {
     const chainID_ETH = 4;

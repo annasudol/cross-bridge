@@ -1,0 +1,42 @@
+{
+  "name": "bridge",
+  "version": "1.0.0",
+  "description": "Crypto cross-chain bridge build in next, nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/annasudol/bridge_ETH-BSC.git"
+  },
+  "author": "Anna Sudol",
+  "license": "ISC",
+  "devDependencies": {
+    "@ethersproject/abi": "^5.4.7",
+    "@ethersproject/providers": "^5.4.7",
+    "@nomicfoundation/hardhat-chai-matchers": "^1.0.4",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
+    "@nomicfoundation/hardhat-toolbox": "^1.0.2",
+    "@nomiclabs/hardhat-ethers": "^2.2.0",
+    "@nomiclabs/hardhat-etherscan": "^3.0.0",
+    "@openzeppelin/hardhat-upgrades": "^1.21.0",
+    "@typechain/ethers-v5": "^10.1.0",
+    "@typechain/hardhat": "^6.1.2",
+    "@types/chai": "^4.2.0",
+    "@types/mocha": "^9.1.0",
+    "@types/node": ">=12.0.0",
+    "chai": "^4.2.0",
+    "ethers": "^5.7.2",
+    "hardhat": "^2.12.0",
+    "hardhat-gas-reporter": "^1.0.2",
+    "solidity-coverage": "^0.7.22",
+    "ts-node": ">=8.0.0",
+    "typechain": "^8.1.0",
+    "typescript": ">=4.5.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.7.3",
+    "dotenv": "^16.0.3"
+  }
+}

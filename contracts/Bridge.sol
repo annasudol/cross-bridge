@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
-import "./TokenERC20.sol";
+import "./TokenErc20.sol";
 import "hardhat/console.sol";
 
 contract Bridge {
@@ -22,7 +22,7 @@ contract Bridge {
     mapping(address => bytes) public signatures;
 
     modifier checkValidERC20(string memory symbol) {
-        require(keccak256(abi.encodePacked(TokenERC20(token).symbol())) ==
+        require(keccak256(abi.encodePacked(TokenErc20(token).symbol())) ==
                 keccak256(abi.encodePacked(symbol)), "non supported erc20 token");
         _;
     }
@@ -35,7 +35,7 @@ contract Bridge {
     //Swap(): transfers tokens from sender to the contract
     function swap(address to, uint256 amount, uint256 nonce, uint256 chainId, string memory symbol)
         checkValidERC20(symbol) chainIdIsSupported(chainId) public {
-            TokenERC20(token).burn(msg.sender, amount);
+            TokenErc20(token).burn(msg.sender, amount);
             emit SwapInitialized(msg.sender, to, amount, nonce, chainId, symbol);
     }
 
@@ -50,7 +50,7 @@ contract Bridge {
 
         require(_verify(message, _signature), "invalid signature");
         signatures[msg.sender] = _signature;
-        TokenERC20(token).mint(to, amount);
+        TokenErc20(token).mint(to, amount);
         emit RedeemInitialized(from, to, amount, nonce, _chainId, symbol);
     }
 

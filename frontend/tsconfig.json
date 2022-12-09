@@ -1,46 +1,28 @@
 {
   "compilerOptions": {
+    "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noEmit": true,
+    "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "removeComments": true,
-    "preserveConstEnums": true,
-    "strict": true,
-    "alwaysStrict": true,
-    "strictNullChecks": true,
-    "noUncheckedIndexedAccess": true,
-
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "allowUnreachableCode": false,
-    "noFallthroughCasesInSwitch": true,
-
-    "target": "es5",
-    "outDir": "out",
-    "declaration": true,
-    "sourceMap": true,
-
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "allowJs": false,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-
-    "jsx": "preserve",
-    "noEmit": true,
     "isolatedModules": true,
+    "jsx": "preserve",
     "incremental": true,
-
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@/*": ["./src/*"],
-      "@/public/*": ["./public/*"]
+      "@/utils/*": ["utils/*"],
+      "@/templates/*": ["templates/*"],
+      "@/layouts/*": ["layouts/*"],
+      "@/ui/*": ["ui/*"]
     }
   },
-  "exclude": ["./out/**/*", "./node_modules/**/*", "cypress/**/*.ts"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }

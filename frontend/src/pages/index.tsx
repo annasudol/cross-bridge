@@ -11,7 +11,7 @@ const Index = () => {
         />
       }
     >
-      <p>bridge</p>
+      <p>bridgexxx </p>
     </Main>
   );
 };

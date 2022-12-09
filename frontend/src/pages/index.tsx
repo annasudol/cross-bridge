@@ -12,7 +12,9 @@ const Index = () => {
         />
       }
     >
-      <Tabs />
+      <div className="flex justify-center">
+        <Tabs />
+      </div>
     </Main>
   );
 };

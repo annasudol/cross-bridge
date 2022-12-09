@@ -9,23 +9,22 @@ type IMainProps = {
 };
 
 const Main = (props: IMainProps) => (
-  <div className="w-full px-1 text-gray-700 antialiased">
+  <div className="antialiased">
     {props.meta}
-    <div className="relative mx-auto max-w-screen-md">
+    <div className="relative mx-auto max-w-xl">
       <WalletConnect />
-      <div className="border-b border-gray-300">
-        <div className="pt-16 pb-8">
-          <div className="text-3xl font-bold text-white">{AppConfig.title}</div>
-        </div>
-      </div>
       <div className="content py-5 text-xl">{props.children}</div>
-      <div className="py-8 text-center text-sm text-white">
-        © Copyright {new Date().getFullYear()} {AppConfig.title}. Made by{' '}
-        <a href="https://github.com/annasudol" className="text-white">
-          Anna Sudol
-        </a>
-        .
-      </div>
+      <footer className="fixed inset-x-auto bottom-2 w-full max-w-xl py-4 text-center text-sm text-white">
+        <p>
+          © Copyright {new Date().getFullYear()} {AppConfig.title}
+        </p>
+        <p>
+          Made by{' '}
+          <a href="https://github.com/annasudol" className="text-white">
+            Anna Sudol
+          </a>
+        </p>
+      </footer>
     </div>
   </div>
 );

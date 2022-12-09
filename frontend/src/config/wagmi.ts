@@ -5,7 +5,7 @@ import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 import { publicProvider } from 'wagmi/providers/public';
 
 export const { chains, provider, webSocketProvider } = configureChains(
-  [chain.mainnet, chain.goerli, chain.rinkeby, chain.kovan, chain.ropsten],
+  [chain.goerli, chain.polygonMumbai],
   [
     alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
     jsonRpcProvider({ rpc: (_chain) => ({ http: _chain.rpcUrls.default }) }),

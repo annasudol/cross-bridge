@@ -1,4 +1,5 @@
 import '../styles/global.css';
+import '@rainbow-me/rainbowkit/styles.css';
 
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { chains, wagmiClient } from 'config/wagmi';

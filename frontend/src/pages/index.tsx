@@ -1,5 +1,6 @@
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
+import Tabs from '@/ui/Tabs';
 
 const Index = () => {
   return (
@@ -11,7 +12,7 @@ const Index = () => {
         />
       }
     >
-      <p>bridgexxx </p>
+      <Tabs />
     </Main>
   );
 };

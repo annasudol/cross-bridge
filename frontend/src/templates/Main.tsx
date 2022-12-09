@@ -18,9 +18,7 @@ const Main = (props: IMainProps) => (
           <div className="text-3xl font-bold text-white">{AppConfig.title}</div>
         </div>
       </div>
-
       <div className="content py-5 text-xl">{props.children}</div>
-
       <div className="py-8 text-center text-sm text-white">
         © Copyright {new Date().getFullYear()} {AppConfig.title}. Made by{' '}
         <a href="https://github.com/annasudol" className="text-white">

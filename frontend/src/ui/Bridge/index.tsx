@@ -3,20 +3,20 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import { ChangeNetwork } from '../ChangeNetwork';
+import { NetworkTab } from '../NetworkTab';
 
 export const Bridge = () => {
   const [sendAmount, setSendAmount] = useState<string | number>('');
   const [tokenBalance, setTokenBalance] = useState(0);
-
+  const [network, setNetwork] = useState('');
   // const handleFaucet = async () => {};
-  function handleBridgeFromSearchChain(): void {}
+
   function handleBridgeSendSearchChain(): void {}
   function handleMaxOut(): void {}
   return (
     <div className="p-6">
       <div className=" pt-4">
         <ChangeNetwork />
-
         <div className="flex flex-row p-2">
           <input
             placeholder=""
@@ -41,9 +41,10 @@ export const Bridge = () => {
           </button>
         </div>
       </div>
-      <div className="flex flex-row justify-between ">
-        <div className="p-5"> </div>{' '}
-        <div className="pr-12 text-base text-gray-200">
+      <div className="flex flex-row justify-between pl-4 pr-12">
+        <NetworkTab />
+
+        <div className="text-base text-gray-200">
           <button onClick={handleMaxOut}>
             <p className="underline underline-offset-1">Max: {tokenBalance}</p>
           </button>

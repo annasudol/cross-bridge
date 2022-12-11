@@ -12,6 +12,7 @@ export const ChangeNetwork = () => {
           account &&
           chain &&
           (!authenticationStatus || authenticationStatus === 'authenticated');
+
         return (
           <div
             {...(!ready && {
@@ -26,7 +27,7 @@ export const ChangeNetwork = () => {
             {((): any => {
               if (connected) {
                 return (
-                  <div className="mb-4 flex w-40 items-center justify-center">
+                  <div className="mb-4 ml-4 flex w-48 items-center justify-start">
                     <span className="pr-2 text-white">From</span>
                     <button
                       onClick={openChainModal}

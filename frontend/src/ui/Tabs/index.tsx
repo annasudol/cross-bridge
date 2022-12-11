@@ -1,5 +1,6 @@
 import { Tab } from '@headlessui/react';
 
+import { Bridge } from '../Bridge';
 import { Facet } from '../Facet';
 
 function classNames(...classes) {
@@ -36,7 +37,7 @@ export default function Tabs() {
                 'bg-blue-900 focus:outline-none'
               )}
             >
-              {idx === 1 ? <Facet /> : <p>bridge</p>}
+              {idx === 1 ? <Facet /> : <Bridge />}
             </Tab.Panel>
           ))}
         </Tab.Panels>

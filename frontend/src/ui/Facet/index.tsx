@@ -16,7 +16,7 @@ export const Facet = () => {
         onClick={handleFaucet}
         className="items-center rounded-full border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-blue-900 shadow-sm hover:bg-green-200 focus:outline-none"
       >
-        Receive 10 Port
+        Receive 10 bEth
       </button>
     </div>
   );

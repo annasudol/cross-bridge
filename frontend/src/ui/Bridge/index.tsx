@@ -14,7 +14,7 @@ export const Bridge = () => {
   function handleBridgeSendSearchChain(): void {}
   function handleMaxOut(): void {}
   return (
-    <div className="p-6">
+    <div className="flex flex-col justify-center p-6">
       <div className=" pt-4">
         <ChangeNetwork />
         <div className="flex flex-row p-2">
@@ -25,11 +25,8 @@ export const Bridge = () => {
             value={sendAmount}
             onChange={(e) => setSendAmount(e.target.value)}
           />
-          <button
-            onClick={handleBridgeSendSearchChain}
-            className="absolute right-[12%] mt-2 rounded-md"
-          >
-            <div className="flex items-center justify-between text-sm text-white">
+          <div className="absolute right-[12%] mt-2">
+            <div className="flex items-center justify-between text-sm text-white ">
               <span className="pr-2">bETH</span>
               <Image
                 src="/assets/ethereum.svg"
@@ -38,18 +35,20 @@ export const Bridge = () => {
                 alt="coin"
               />
             </div>
-          </button>
+          </div>
         </div>
       </div>
       <div className="flex flex-row justify-between pl-4 pr-12">
         <NetworkTab />
-
         <div className="text-base text-gray-200">
           <button onClick={handleMaxOut}>
             <p className="underline underline-offset-1">Max: {tokenBalance}</p>
           </button>
         </div>
       </div>
+      <button className="mt-2 w-60 items-center justify-items-center rounded-full border border-transparent bg-green-100 px-4 py-2 text-base font-medium text-blue-900 shadow-sm hover:bg-green-200 focus:outline-none">
+        Send
+      </button>
     </div>
   );
 };

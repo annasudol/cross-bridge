@@ -2,6 +2,8 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
+import { ChangeNetwork } from '../ChangeNetwork';
+
 export const Bridge = () => {
   const [sendAmount, setSendAmount] = useState<string | number>('');
   const [tokenBalance, setTokenBalance] = useState(0);
@@ -12,29 +14,9 @@ export const Bridge = () => {
   function handleMaxOut(): void {}
   return (
     <div className="p-6">
-      <div className="flex-wrap pt-4">
-        <div className="flex flex-row text-sm">
-          <p className="pr-3 pt-2 text-base text-white">From</p>
-          <button
-            onClick={handleBridgeFromSearchChain}
-            className="h-14 w-24 rounded-md bg-gray-600 bg-opacity-20"
-          >
-            <div className="flex w-20 justify-between px-2">
-              <Image
-                src="/assets/arrow.svg"
-                width={20}
-                height={20}
-                alt="inputArrow"
-              />
-              <Image
-                src="/assets/matic.svg"
-                width={30}
-                height={30}
-                alt="coin"
-              />
-            </div>
-          </button>
-        </div>
+      <div className=" pt-4">
+        <ChangeNetwork />
+
         <div className="flex flex-row p-2">
           <input
             placeholder=""

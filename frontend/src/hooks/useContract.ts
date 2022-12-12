@@ -4,6 +4,9 @@ import { Providers } from 'config/providers';
 import { Contract } from 'ethers';
 import { useMemo } from 'react';
 
+import BridgeJSON from '../abi/Bridge.json';
+import ERC20JSON from '../abi/BridgeERC20.json';
+
 export const createStaticContract = <TContract extends Contract = Contract>(
   ABI: ContractInterface
 ) => {
@@ -16,26 +19,5 @@ export const createStaticContract = <TContract extends Contract = Contract>(
   };
 };
 
-// const createDynamicContract = <TContract extends Contract = Contract>(
-//   ABI: ContractInterface
-// ) => {
-//   return (addressMap: AddressMap, asSigner = false) => {
-//     const provider = useProvider();
-//     const { data: signer } = useSigner();
-//     const { chain = { id: defaultChainId } } = useNetwork();
-
-//     return useMemo(() => {
-//       const address = addressMap[chain.id as keyof typeof addressMap];
-
-//       if (!address) return null;
-
-//       const providerOrSigner = asSigner && signer ? signer : provider;
-
-//       return new Contract(address, ABI, providerOrSigner) as TContract;
-//     }, [addressMap, chain.id, asSigner, signer, provider]);
-//   };
-// };
-
-// export const useStaticExampleContract = createStaticContract<type>(ABI);
-
-// export const useDynamicExampleContract = createDynamicContract<type>(ABI);
+export const useBridgeContract = createStaticContract(BridgeJSON.abi);
+export const useTokenContract = createStaticContract(ERC20JSON.abi);

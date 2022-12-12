@@ -7,8 +7,8 @@ const Index = () => {
     <Main
       meta={
         <Meta
-          title="Cross chain ETH-BSC Bridge"
-          description="Crypto cross-chain bridge between Ethereum and Binance networks"
+          title="Cross chain ETH-MATIC Bridge"
+          description="Crypto cross-chain bridge between Ethereum and Polygon networks"
         />
       }
     >

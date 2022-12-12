@@ -47,12 +47,12 @@ export class RPC {
 
   public static getNodeUrls = (chainId: ChainId) => {
     switch (chainId) {
-      case ChainId.BSC:
+      case ChainId.MATIC:
         return this._get({
           key: `REACT_APP_ETHEREUM_NODE_URL`,
           fallback: `https://eth-mainnet.alchemyapi.io/v2/${env.alchemyId}`,
         });
-      case ChainId.GÖRLI:
+      case ChainId.GOERLI:
         return this._get({
           key: `REACT_APP_RINKEBY_NODE_URL`,
           fallback: `https://eth-rinkeby.alchemyapi.io/v2/${env.alchemyId}`,
@@ -64,4 +64,3 @@ export class RPC {
         });
     }
   };
-}

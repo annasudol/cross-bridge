@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { NotificationContainer } from 'react-notifications';
 
 import { WalletConnect } from '@/ui/ConnectWallet';
 import { AppConfig } from '@/utils/AppConfig';
@@ -26,6 +27,7 @@ const Main = (props: IMainProps) => (
         </p>
       </footer>
     </div>
+    <NotificationContainer />
   </div>
 );
 

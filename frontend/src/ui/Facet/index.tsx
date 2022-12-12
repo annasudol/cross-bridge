@@ -1,7 +1,18 @@
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { useNetwork } from 'wagmi';
+
+import { useBridgeContract } from '../../hooks/useContract';
 
 export const Facet = () => {
   const handleFaucet = async () => {};
+  const { chain } = useNetwork();
+  const [contract, setContract] = useState();
+  const c = useBridgeContract('0xA097413a69B55fe1aB8D6F0a4612CdAaA21dc725', 5);
+  useEffect(() => {
+    const _contract = useBridgeContract();
+  }, [chain.id]);
+
   return (
     <div className="flex flex-col items-center p-10">
       <Image src="/assets/airdrop.svg" width={100} height={100} alt="airdrop" />

@@ -1,4 +1,9 @@
 import { Tab } from '@headlessui/react';
+import { contractAddress } from 'config/constants/chainId';
+import { useEffect, useState } from 'react';
+import { useNetwork } from 'wagmi';
+
+import { useBridgeContract, useTokenContract } from '@/hooks/useContract';
 
 import { Bridge } from '../Bridge';
 import { Facet } from '../Facet';
@@ -8,6 +13,29 @@ function classNames(...classes: string[]) {
 }
 
 export default function Tabs() {
+  const { chain } = useNetwork();
+  const chainId = chain?.id || 5;
+  const [contract, setContract] = useState();
+
+  const contractBridge = useBridgeContract(
+    contractAddress.Bridge[chainId],
+    chainId
+  );
+  const contractToken = useTokenContract(contractAddress.tokenER20[5], 5);
+
+  useEffect(() => {}, [contractToken]);
+
+  const contractValues = async () => {
+    // const balance = await contractToken?.balanceOf(
+    //   '0x80dD5aD6B8775c4E31C999cA278Ef4D035717872'
+    // );
+    // console.log(balance);
+    // return balance;
+    console.log(await contractToken?.name());
+  };
+
+  contractValues();
+
   const categories = ['Bridge', 'Facet'];
   return (
     <div className="mt-16 w-full max-w-xl py-16 sm:px-0">
@@ -36,6 +64,7 @@ export default function Tabs() {
                 'bg-blue-900 focus:outline-none'
               )}
             >
+              <button onClick={contractValues}>clis</button>
               {idx === 1 ? <Facet /> : <Bridge />}
             </Tab.Panel>
           ))}

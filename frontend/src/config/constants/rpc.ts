@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
-import { env } from '../env';
 import { ChainId } from './chainId';
 
 export class RPC {
@@ -49,18 +48,19 @@ export class RPC {
     switch (chainId) {
       case ChainId.MATIC:
         return this._get({
-          key: `REACT_APP_ETHEREUM_NODE_URL`,
-          fallback: `https://eth-mainnet.alchemyapi.io/v2/${env.alchemyId}`,
+          key: `REACT_APP_POLYGON_NODE_URL`,
+          fallback:
+            'https://polygon-mainnet.g.alchemy.com/v2/_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC',
         });
       case ChainId.GOERLI:
         return this._get({
           key: `REACT_APP_RINKEBY_NODE_URL`,
-          fallback: `https://eth-rinkeby.alchemyapi.io/v2/${env.alchemyId}`,
+          fallback: `https://eth-goerli.g.alchemy.com/v2/udO1rY7wMeUIbBDw0si9he0FZPpY2rV6`,
         });
       default:
         return this._get({
           key: `REACT_APP_RINKEBY_NODE_URL`,
-          fallback: `https://eth-rinkeby.alchemyapi.io/v2/${env.alchemyId}`,
+          fallback: `https://eth-goerli.g.alchemy.com/v2/udO1rY7wMeUIbBDw0si9he0FZPpY2rV6`,
         });
     }
   };

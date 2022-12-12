@@ -2,7 +2,6 @@ export enum ChainId {
   GOERLI = 5,
   MATIC = 80001,
 }
-
 export const defaultChainId = 5;
 
 export const supportedChains: Array<number> = [5, 80001];

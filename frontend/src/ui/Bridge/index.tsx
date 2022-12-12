@@ -1,29 +1,21 @@
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
 import Image from 'next/image';
-import { useState } from 'react';
-import { useContractEvent } from 'wagmi';
+import { useEffect, useState } from 'react';
 
 import { ChangeNetwork } from '../ChangeNetwork';
 import { NetworkTab } from '../NetworkTab';
-import ensRegistryABI from './abi.json';
 
 export const Bridge = () => {
   const [sendAmount, setSendAmount] = useState<string | number>('');
   const [tokenBalance, setTokenBalance] = useState(0);
-  const [network, setNetwork] = useState('');
-  // const handleFaucet = async () => {};
+  // const [network, setNetwork] = useState('');
+  // // const handleFaucet = async () => {};
 
-  function handleBridgeSendSearchChain(): void {}
+  // function handleBridgeSendSearchChain(): void {}
   function handleMaxOut(): void {}
-  useContractEvent({
-    addressOrName: '0xfBf591d25A5e8121f4eBA037dF264C4D29786b25',
-    contractInterface: ensRegistryABI.abi,
-    chainId: 5,
-    eventName: 'NftItemCreated',
-    listener(node) {
-      console.log(node, 'node');
-    },
-  });
+
+  useEffect(() => {}, []);
+
   return (
     <div className="flex flex-col justify-center p-6">
       <div className=" pt-4">

@@ -4,14 +4,17 @@ import "@nomicfoundation/hardhat-chai-matchers";
 import "@nomiclabs/hardhat-ethers";
 import "@openzeppelin/hardhat-upgrades";
 import * as dotenv from "dotenv";
-
+import "./task/swap_redeem"
 dotenv.config();
 
 const ALCHEMY_PROJECT_ID = process.env.ALCHEMY_PROJECT_ID || '';
-const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || '';;
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || '';
+const POLYSCAN_API_KEY = process.env.POLYSCAN_API_KEY || '';
+const BSCSCAN_API_KEY = process.env.BSCSCAN_API_KEY || '';
 const MNEMONIC = process.env.MNEMONIC || '';;
 const GOERLI_URL = process.env.ALCHEMY_PROJECT_ID ? `https://eth-goerli.g.alchemy.com/v2/${ALCHEMY_PROJECT_ID}` : '';
 const BSC_TEST_URL = `https://data-seed-prebsc-1-s1.binance.org:8545/`;
+const MATIC_TEST_URL = `https://polygon-mumbai.g.alchemy.com/v2/${POLYSCAN_API_KEY}`;
 
 const config: HardhatUserConfig = {
   solidity: "0.8.17",
@@ -27,14 +30,20 @@ const config: HardhatUserConfig = {
       chainId: 97,
       gasPrice: 20000000000,
       accounts: { mnemonic: MNEMONIC }
-    }
+    },
+    matic: {
+      url: MATIC_TEST_URL,
+      chainId: 80001,
+      gasPrice: 20000000000,
+      accounts: { mnemonic: MNEMONIC }
+    },
   },
   gasReporter: {
     enabled: false,
     currency: "USD",
   },
   etherscan: {
-    apiKey: ETHERSCAN_API_KEY
+    apiKey: BSCSCAN_API_KEY
   },
 };
 

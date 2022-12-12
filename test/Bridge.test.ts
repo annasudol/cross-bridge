@@ -1,18 +1,20 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import { Bridge__factory, TokenErc20__factory, Bridge, TokenErc20 } from "../typechain-types";
+import { Bridge__factory, BridgeERC20__factory, Bridge, BridgeERC20 } from "../typechain-types";
 
 describe("Bridge", function () {
-    const chainID_ETH = 4;
+    const chainID_ETH = 5;
     const chainID_BSC = 97;
-    const symbol = "BRIDGE_ETH_BSC";
+    const eETH = "eETH";
+    const bETH = "bETH";
     let Bridge: Bridge__factory;
-    let TokenErc20: TokenErc20__factory;
-    let token_BSC: TokenErc20;
-    let token_ETH: TokenErc20;
-    let bridge_BSC_TO_ETH: Bridge;
-    let bridge_ETH_TO_BSC: Bridge;
+    let BridgeERC20: BridgeERC20__factory;
+    let token_bETH: BridgeERC20;
+    let token_eETH: BridgeERC20;
+
+    let bridge_ETH: Bridge;
+    let bridge_BSC: Bridge;
 
     let validator: SignerWithAddress;
     let acc0: SignerWithAddress;
@@ -22,80 +24,89 @@ describe("Bridge", function () {
 
     beforeEach(async function () {
         [acc0, acc1, validator] = await ethers.getSigners();
-        TokenErc20 = await ethers.getContractFactory("TokenErc20");
-        token_BSC = await TokenErc20.deploy('token_BSC', symbol, 100);
-        token_ETH = await TokenErc20.deploy('token_ETH', symbol, 100);
+        BridgeERC20 = await ethers.getContractFactory("BridgeERC20");
+        token_bETH = await BridgeERC20.deploy('token_bETH', bETH, 100);
+        token_eETH = await BridgeERC20.deploy('token_eETH', eETH, 100);
         Bridge = await ethers.getContractFactory("Bridge");
 
         //deployed bridge used to send token from binance to ethereum
-        bridge_BSC_TO_ETH = await Bridge.deploy(validator.address, token_BSC.address, chainID_BSC);
+        bridge_BSC = await Bridge.deploy(validator.address, token_bETH.address, chainID_BSC);
         //deployed bridge used to send token from ethereum to binance
-        bridge_ETH_TO_BSC = await Bridge.deploy(validator.address, token_ETH.address, chainID_ETH);
+        bridge_ETH = await Bridge.deploy(validator.address, token_eETH.address, chainID_ETH);
 
     });
+    describe('facet', () => {
+        it('send eth to account successfully', async function () {
+            await token_bETH.grantRole(AUTHORIZED_ROLE, bridge_BSC.address);
+            const tx = await bridge_BSC.facet();
+            expect(tx).to.emit(token_bETH, "Transfer").withArgs(ethers.constants.AddressZero, acc0.address, ethers.utils.formatEther('1'));
+            await expect(bridge_BSC.facet()).to.rejectedWith('we can only send facet every 24 hours');
+        })
+    })
     describe('swap and redeem tokens', () => {
         it('from Binance to Ethereum', async function () {
             const value = 10000;
-            const balance_acc0_before_swap = await token_BSC.balanceOf(acc0.address);
+            const balance_acc0_before_swap = await token_bETH.balanceOf(acc0.address);
             //swap tokens from binance to ethereum
             //token_BSC.burn(to, amount)
-            await expect(bridge_BSC_TO_ETH.swap(acc1.address, value, 0, chainID_BSC, symbol)).to.rejectedWith('not authorized');
+            await expect(bridge_BSC.swap(acc1.address, value, 0, chainID_BSC, bETH)).to.rejectedWith('not authorized');
 
             //allow bridge to burn
-            await token_BSC.grantRole(AUTHORIZED_ROLE, bridge_BSC_TO_ETH.address);
-            await expect(bridge_BSC_TO_ETH.swap(acc1.address, value, 0, chainID_ETH, symbol)).to.rejectedWith('non supported chain');
-            await expect(bridge_BSC_TO_ETH.swap(acc1.address, value, 0, chainID_ETH, 'ETH')).to.rejectedWith('non supported erc20 token');
+            await token_bETH.grantRole(AUTHORIZED_ROLE, bridge_BSC.address);
+            await expect(bridge_BSC.swap(acc1.address, value, 0, chainID_ETH, bETH)).to.rejectedWith('non supported chain');
+            await expect(bridge_BSC.swap(acc1.address, value, 0, chainID_ETH, 'ETH')).to.rejectedWith('non supported erc20 token');
 
-            const tx_swap = await bridge_BSC_TO_ETH.swap(acc1.address, value, 0, chainID_BSC, symbol);
-            expect(tx_swap).to.emit(bridge_BSC_TO_ETH, "SwapInitialized").withArgs(acc0.address, acc1.address, value, 0, chainID_BSC, symbol);
-            //expect to balance is lower on BSC chain for acc0
-            const balance_acc0__after_swap = await token_BSC.balanceOf(acc0.address);
+            const tx_swap = await bridge_BSC.swap(acc1.address, value, 0, chainID_BSC, bETH);
+            expect(tx_swap).to.emit(bridge_BSC, "SwapInitialized").withArgs(acc0.address, acc1.address, value, 0, chainID_BSC, bETH);
+            // //expect to balance is lower on BSC chain for acc0
+            const balance_acc0__after_swap = await token_bETH.balanceOf(acc0.address);
             expect(balance_acc0_before_swap).to.equal(balance_acc0__after_swap.add(value));
 
             let messageHash = ethers.utils.solidityKeccak256(
                 ["address", "address", "uint256", "uint256", "uint256", "string"],
-                [acc0.address, acc1.address, value, 0, chainID_ETH, symbol]
+                [acc0.address, acc1.address, value, 0, chainID_ETH, eETH]
             );
             const rightSignature = await signature(messageHash, validator);
             messageHash = ethers.utils.solidityKeccak256(
                 ["address", "address", "uint256", "uint256", "uint256", "string"],
-                [acc1.address, acc1.address, value, 0, chainID_ETH, symbol]
+                [acc1.address, acc1.address, value, 0, chainID_ETH, bETH]
             );
             const wrongSignature = await signature(messageHash, validator);
 
-            await expect(bridge_ETH_TO_BSC.redeem(acc0.address, acc1.address, value, 0, chainID_ETH, symbol, rightSignature)).to.rejectedWith('not authorized');
+            await expect(bridge_ETH.redeem(acc0.address, acc1.address, value, 0, chainID_ETH, eETH, rightSignature)).to.rejectedWith('not authorized');
             //allow bridge to mint
-            await token_ETH.grantRole(AUTHORIZED_ROLE, bridge_ETH_TO_BSC.address);
+            await token_eETH.grantRole(AUTHORIZED_ROLE, bridge_ETH.address);
 
-            await expect(bridge_ETH_TO_BSC.redeem(acc0.address, acc1.address, value, 0, chainID_ETH, symbol, wrongSignature)).to.rejectedWith('invalid signature');
+            await expect(bridge_ETH.redeem(acc0.address, acc1.address, value, 0, chainID_ETH, eETH, wrongSignature)).to.rejectedWith('invalid signature');
 
-            const balance_acc1_before_redeem = await token_ETH.balanceOf(acc1.address);
+            const balance_acc1_before_redeem = await token_eETH.balanceOf(acc1.address);
 
-            const tx_redeem = await bridge_ETH_TO_BSC.redeem(acc0.address, acc1.address, value, 0, chainID_ETH, symbol, rightSignature);
+            const tx_redeem = await bridge_ETH.redeem(acc0.address, acc1.address, value, 0, chainID_ETH, eETH, rightSignature);
 
-            expect(tx_redeem).to.emit(bridge_ETH_TO_BSC, "RedeemInitialized").withArgs(acc0.address, acc1.address, value, 0, chainID_ETH, symbol);
+            expect(tx_redeem).to.emit(bridge_BSC, "RedeemInitialized").withArgs(acc0.address, acc1.address, value, 0, chainID_ETH, eETH);
 
-            const balance_acc1_after_redeem = await token_ETH.balanceOf(acc1.address);
+            const balance_acc1_after_redeem = await token_eETH.balanceOf(acc1.address);
             //expect to balance is higher on ETH chain for acc1
             expect(balance_acc1_before_redeem).to.equal(balance_acc1_after_redeem.sub(value));
 
-            await expect(bridge_ETH_TO_BSC.redeem(acc0.address, acc1.address, value, 0, chainID_ETH, symbol, rightSignature)).to.rejectedWith('no re-entrance');
+            await expect(bridge_ETH.redeem(acc0.address, acc1.address, value, 0, chainID_ETH, eETH, rightSignature)).to.rejectedWith('re-entrance');
         });
         it('from Ethereum to Binance', async function () {
-            await token_ETH.grantRole(AUTHORIZED_ROLE, bridge_ETH_TO_BSC.address);
-            await token_BSC.grantRole(AUTHORIZED_ROLE, bridge_BSC_TO_ETH.address);
+            await token_eETH.grantRole(AUTHORIZED_ROLE, bridge_ETH.address);
+            await token_bETH.grantRole(AUTHORIZED_ROLE, bridge_BSC.address);
             const value = 1000;
-            const tx_swap = await bridge_ETH_TO_BSC.swap(acc0.address, value, 0, chainID_ETH, symbol);
-            expect(tx_swap).to.emit(bridge_BSC_TO_ETH, "SwapInitialized").withArgs(acc0.address, acc0.address, value, 0, chainID_ETH, symbol);
-            expect(tx_swap).to.emit(token_ETH, "Transfer").withArgs(ethers.constants.AddressZero, acc0.address, value);
-            let messageHash = ethers.utils.solidityKeccak256(
+            const tx_swap = await bridge_ETH.swap(acc0.address, value, 0, chainID_ETH, eETH);
+            expect(tx_swap).to.emit(bridge_ETH, "SwapInitialized").withArgs(acc0.address, acc0.address, value, 0, chainID_ETH, eETH);
+            expect(tx_swap).to.emit(token_eETH, "Transfer").withArgs(ethers.constants.AddressZero, acc0.address, value); //burn eth on goerli
+            const messageHash = ethers.utils.solidityKeccak256(
                 ["address", "address", "uint256", "uint256", "uint256", "string"],
-                [acc0.address, acc0.address, value, 0, chainID_BSC, symbol]
+                [acc0.address, acc0.address, value, 0, chainID_BSC, bETH]
             );
+
             const rightSignature = await signature(messageHash, validator);
-            const tx_redeem = await bridge_BSC_TO_ETH.redeem(acc0.address, acc0.address, value, 0, chainID_BSC, symbol, rightSignature);
-            expect(tx_redeem).to.emit(bridge_BSC_TO_ETH, "RedeemInitialized").withArgs(acc0.address, acc0.address, value, 0, chainID_BSC, symbol);
-            expect(tx_swap).to.emit(token_BSC, "Transfer").withArgs(acc0.address, ethers.constants.AddressZero, value);
+            const tx_redeem = await bridge_BSC.redeem(acc0.address, acc0.address, value, 0, chainID_BSC, bETH, rightSignature);
+            expect(tx_redeem).to.emit(bridge_BSC, "RedeemInitialized").withArgs(acc0.address, acc0.address, value, 0, chainID_BSC, bETH);
+            expect(tx_swap).to.emit(token_bETH, "Transfer").withArgs(acc0.address, ethers.constants.AddressZero, value);
         })
     });
 });
@@ -106,3 +117,4 @@ async function signature(messageHash: string, validator: SignerWithAddress) {
     const rawSignature = await validator.signMessage(messageArray);
     return rawSignature;
 }
+

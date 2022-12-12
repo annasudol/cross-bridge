@@ -1,5 +1,5 @@
-import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { ethers } from "ethers";
+import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 
 async function signMessage(from: string, to: string, value: number, chainId: number, symbol: string, validator: SignerWithAddress) {
     const messageHash = ethers.utils.solidityKeccak256(

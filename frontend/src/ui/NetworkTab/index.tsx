@@ -3,6 +3,7 @@ import { useNetwork } from 'wagmi';
 
 export const NetworkTab = () => {
   const { chain } = useNetwork();
+
   return (
     <p className="flex w-72 justify-start text-white">
       <span className="mr-2">

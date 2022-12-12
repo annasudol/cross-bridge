@@ -9,7 +9,6 @@ function classNames(...classes: string[]) {
 
 export default function Tabs() {
   const categories = ['Bridge', 'Facet'];
-
   return (
     <div className="mt-16 w-full max-w-xl py-16 sm:px-0">
       <Tab.Group>
@@ -29,7 +28,7 @@ export default function Tabs() {
           ))}
         </Tab.List>
         <Tab.Panels className="mt-2">
-          {categories.map((posts, idx) => (
+          {categories.map((_cat, idx) => (
             <Tab.Panel
               key={idx}
               className={classNames(

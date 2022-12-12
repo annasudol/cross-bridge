@@ -18,17 +18,11 @@ const connectors = connectorsForWallets([
     groupName: 'Popular',
     wallets: [wallet.metaMask({ chains, shimDisconnect: true })],
   },
-  {
-    groupName: 'Other',
-    wallets: [
-      wallet.trust({ chains, shimDisconnect: true }),
-      wallet.imToken({ chains }),
-    ],
-  },
 ]);
 
 export const wagmiClient = createClient({
   autoConnect: true,
   connectors,
   provider,
+  webSocketProvider,
 });

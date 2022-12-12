@@ -1,11 +1,8 @@
 import type { ContractInterface } from '@ethersproject/contracts';
-import { Contract } from '@ethersproject/contracts';
-import type { AddressMap } from 'config/constants/addresses';
 import type { ChainId } from 'config/constants/chainId';
-import { defaultChainId } from 'config/constants/chainId';
 import { Providers } from 'config/providers';
+import { Contract } from 'ethers';
 import { useMemo } from 'react';
-import { useNetwork, useProvider, useSigner } from 'wagmi';
 
 export const createStaticContract = <TContract extends Contract = Contract>(
   ABI: ContractInterface
@@ -19,25 +16,25 @@ export const createStaticContract = <TContract extends Contract = Contract>(
   };
 };
 
-const createDynamicContract = <TContract extends Contract = Contract>(
-  ABI: ContractInterface
-) => {
-  return (addressMap: AddressMap, asSigner = false) => {
-    const provider = useProvider();
-    const { data: signer } = useSigner();
-    const { chain = { id: defaultChainId } } = useNetwork();
+// const createDynamicContract = <TContract extends Contract = Contract>(
+//   ABI: ContractInterface
+// ) => {
+//   return (addressMap: AddressMap, asSigner = false) => {
+//     const provider = useProvider();
+//     const { data: signer } = useSigner();
+//     const { chain = { id: defaultChainId } } = useNetwork();
 
-    return useMemo(() => {
-      const address = addressMap[chain.id as keyof typeof addressMap];
+//     return useMemo(() => {
+//       const address = addressMap[chain.id as keyof typeof addressMap];
 
-      if (!address) return null;
+//       if (!address) return null;
 
-      const providerOrSigner = asSigner && signer ? signer : provider;
+//       const providerOrSigner = asSigner && signer ? signer : provider;
 
-      return new Contract(address, ABI, providerOrSigner) as TContract;
-    }, [addressMap, chain.id, asSigner, signer, provider]);
-  };
-};
+//       return new Contract(address, ABI, providerOrSigner) as TContract;
+//     }, [addressMap, chain.id, asSigner, signer, provider]);
+//   };
+// };
 
 // export const useStaticExampleContract = createStaticContract<type>(ABI);
 

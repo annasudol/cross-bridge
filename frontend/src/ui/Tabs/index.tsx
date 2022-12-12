@@ -3,7 +3,7 @@ import { Tab } from '@headlessui/react';
 import { Bridge } from '../Bridge';
 import { Facet } from '../Facet';
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 

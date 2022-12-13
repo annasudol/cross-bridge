@@ -62,3 +62,8 @@ Swap token from Binance to Ethereum
 ### Bscscan 0xE88702C4B257f30a5929329191ae58A011f35172
 [contract at testnet bscscan] (https://testnet.bscscan.com/address/0xE88702C4B257f30a5929329191ae58A011f35172#code)
 
+#Frontend app built with next.js - work in progress
+```
+yarn
+yarn run dev
+```

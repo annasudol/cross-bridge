@@ -35,7 +35,7 @@ Swap token from Binance to Ethereum
 2. Signed message is created
 3. Reedem function can be run with created previously message, then: eETH Tokens are minted on the Ethereum network
 
-/////------------------------------------------------TOKENS-----------------------------------------------------//////
+/////------------------------TOKENS----------------------------------//////
 ## Token eETH on Goerli Tesnet 
 ### 0xf121DaF9eDdF06F3f7DD56952F6BFd000BFffA61
 [contract at goerli.etherscan.io] (https://goerli.etherscan.io/address/0xf121DaF9eDdF06F3f7DD56952F6BFd000BFffA61#writeContract)
@@ -48,7 +48,7 @@ Swap token from Binance to Ethereum
 ### bscscan Testnet 0x11E47a0465D3933E372fD4A2854e897934Fd14d7
 [contract at testnet bscscan] (https://testnet.bscscan.com/address/0x11E47a0465D3933E372fD4A2854e897934Fd14d7#code)
 
-/////------------------------------------------------Bridges-----------------------------------------------------//////
+/////------------------------BRIDGES----------------------------------//////
 ## Bridge Ethereum
 ### Goerli 0xA097413a69B55fe1aB8D6F0a4612CdAaA21dc725
 [contract at goerli.etherscan.io] (https://goerli.etherscan.io/address/0xA097413a69B55fe1aB8D6F0a4612CdAaA21dc725#code)
@@ -62,7 +62,7 @@ Swap token from Binance to Ethereum
 ### Bscscan 0xE88702C4B257f30a5929329191ae58A011f35172
 [contract at testnet bscscan] (https://testnet.bscscan.com/address/0xE88702C4B257f30a5929329191ae58A011f35172#code)
 
-#Frontend app built with next.js - work in progress
+# Frontend app built with next.js - work in progress
 ```
 yarn
 yarn run dev

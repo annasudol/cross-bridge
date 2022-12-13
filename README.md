@@ -15,14 +15,18 @@ npm install
 npx hardhat test
 npx hardhat coverage
 ```
-
+## Taks for swap from Ethereum to Binance
 ```tasks
-npx hardhat swapETH --to [address] --value [value] --network goerli
-//and then copy values from console for redeem with signature
+1. npx hardhat swapETH --to [address] --value [value] --network goerli
+2. then copy values from console for redeem with signature
 npx hardhat swapBSC --to [address] --value [value] --network bsctestnet
 //and then copy values from console for redeem with signature
 ```
-
+## Taks for swap from Binance to Ethereum
+```tasks
+1.npx hardhat swapBSC --to [address] --value [value] --network bsctestnet
+2 then copy values from console for redeem with signature
+```
 ## examples of swaps:
 when Swap token from Ethereum to Binance
 1. eETH tokens are burn on Ethereum contract by Bridge ETH

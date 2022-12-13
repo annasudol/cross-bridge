@@ -4,10 +4,7 @@ Token eETH gave `AUTHORIZED_ROLE` to Ethereum bridge, to mint and burn tokens
 Token bETH gave `AUTHORIZED_ROLE` to Binance bridge, to mint and burn tokens
 Token mETH gave `AUTHORIZED_ROLE` to Matic bridge, to mint and burn tokens
 
-The project was built using solidity and hardhat. Contracts are tested with full coverage and deployed on:
--Goerli Ethereum Testnet Network
--Binance Testnet Network
--Matic Mumbai Testnet Networks
+The project was built using solidity and hardhat. Contracts are tested with full coverage and deployed on Goerli Ethereum Testnet Network, Binance Testnet Network, Matic Mumbai Testnet Networks
 
 add .env file
 ```
@@ -19,8 +16,7 @@ npx hardhat coverage
 ```tasks
 1. npx hardhat swapETH --to [address] --value [value] --network goerli
 2. then copy values from console for redeem with signature
-npx hardhat swapBSC --to [address] --value [value] --network bsctestnet
-//and then copy values from console for redeem with signature
+
 ```
 ## Taks for swap from Binance to Ethereum
 ```tasks

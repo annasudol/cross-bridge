@@ -24,10 +24,11 @@ npx hardhat swapBSC --to [address] --value [value] --network bsctestnet
 ```
 ## Taks for swap from Binance to Ethereum
 ```tasks
-1.npx hardhat swapBSC --to [address] --value [value] --network bsctestnet
-2 then copy values from console for redeem with signature
+1. npx hardhat swapBSC --to [address] --value [value] --network bsctestnet
+2. then copy values from console for redeem with signature
 ```
-## examples of swaps:
+
+## swaps explained
 when Swap token from Ethereum to Binance
 1. eETH tokens are burn on Ethereum contract by Bridge ETH
 2. Signed message is created

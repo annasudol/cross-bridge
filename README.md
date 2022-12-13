@@ -18,7 +18,9 @@ npx hardhat coverage
 
 ```tasks
 npx hardhat swapETH --to [address] --value [value] --network goerli
+//and then copy values from console for redeem with signature
 npx hardhat swapBSC --to [address] --value [value] --network bsctestnet
+//and then copy values from console for redeem with signature
 ```
 
 ## examples of swaps:
@@ -43,7 +45,7 @@ Swap token from Binance to Ethereum
 
 ## Token_bETH on bscscan Testnet 
 ### bscscan Testnet 0x11E47a0465D3933E372fD4A2854e897934Fd14d7
-[contract at Mumbai Matic] (https://testnet.bscscan.com/address/0x11E47a0465D3933E372fD4A2854e897934Fd14d7#code)
+[contract at testnet bscscan] (https://testnet.bscscan.com/address/0x11E47a0465D3933E372fD4A2854e897934Fd14d7#code)
 
 /////------------------------BRIDGES------------------------/////
 ## Bridge Ethereum

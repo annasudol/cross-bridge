@@ -1,33 +1,61 @@
 # Cross chain bridge
-bridge, which executes the ERC20 token from Goerli to Binance Testnet, and reversely.
-Token Eth gave `AUTHORIZED_ROLE` to Ethereum bridge, to mint and burn tokens
-Token BSC gave `AUTHORIZED_ROLE` to Binance bridge, to mint and burn tokens
+bridge, which executes the ERC20 tokens between Goerli, Binance Testnet and Matic Mumbai Testnet, and reversely.
+Token eETH gave `AUTHORIZED_ROLE` to Ethereum bridge, to mint and burn tokens
+Token bETH gave `AUTHORIZED_ROLE` to Binance bridge, to mint and burn tokens
+Token mETH gave `AUTHORIZED_ROLE` to Matic bridge, to mint and burn tokens
 
+The project was built using solidity and hardhat. Contracts are tested with full coverage and deployed on:
+-Goerli Ethereum Testnet Network
+-Binance Testnet Network
+-Matic Mumbai Testnet Networks
+
+add .env file
+```
+npm install
+npx hardhat test
+npx hardhat coverage
+```
+
+```tasks
+npx hardhat swapETH --to [address] --value [value] --network goerli
+npx hardhat swapBSC --to [address] --value [value] --network bsctestnet
+```
+
+## examples of swaps:
 when Swap token from Ethereum to Binance
-1. token are burn on Ethereum ERC20 contract by Bridge ETH
+1. eETH tokens are burn on Ethereum contract by Bridge ETH
 2. Signed message is created
-3. Reedem function can be run with created previously message, then: Tokens are minted on Binance network
+3. Reedem function can be run with created previously message, then: Tokens bETH are minted on the Binance network
 
 Swap token from Binance to Ethereum
-1. token are burn on Binance ERC20 contract by Bridge BSC
+1. bETH tokens are burn on Binance ERC20 contract by Bridge BSC
 2. Signed message is created
-3. Reedem function can be run with created previously message, then: Tokens are minted on Ethereum network
+3. Reedem function can be run with created previously message, then: eETH Tokens are minted on the Ethereum network
 
+/////------------------------TOKENS-----------------------------//////
+## Token eETH on Goerli Tesnet 
+### 0xf121DaF9eDdF06F3f7DD56952F6BFd000BFffA61
+[contract at goerli.etherscan.io] (https://goerli.etherscan.io/address/0xf121DaF9eDdF06F3f7DD56952F6BFd000BFffA61#writeContract)
 
+## Token_mETH on Matic Testnet 
+### Matic Mumbai 0xD46B25771dbcd034772D0f2C5dECE94Cd3684435
+[contract at Mumbai Matic] (https://mumbai.polygonscan.com/address/0xD46B25771dbcd034772D0f2C5dECE94Cd3684435#code)
 
-## Token_ETH on Goerli Testnet 
-### 0x0767cD340309081fB94D51888DF2685Eba72c1E6
-[contract at goerli.etherscan.io] (https://goerli.etherscan.io/address/0x0767cD340309081fB94D51888DF2685Eba72c1E6)
+## Token_bETH on bscscan Testnet 
+### bscscan Testnet 0x11E47a0465D3933E372fD4A2854e897934Fd14d7
+[contract at Mumbai Matic] (https://testnet.bscscan.com/address/0x11E47a0465D3933E372fD4A2854e897934Fd14d7#code)
 
-## Token_ETH on Bscscan Testnet 
-### Bscscan 0x3b2E588052D623f17b37A58c8D705E438B7B3338
-[contract at testnet bscscan] (https://testnet.bscscan.com/address/0x3b2E588052D623f17b37A58c8D705E438B7B3338#code)
-
+/////------------------------BRIDGES------------------------/////
 ## Bridge Ethereum
-### Goerli 0xc998336F29A1ba24751c2ca046C0395DE277f775
-[contract at goerli.etherscan.io] (https://goerli.etherscan.io/address/0xc998336F29A1ba24751c2ca046C0395DE277f775#code)
+### Goerli 0xA097413a69B55fe1aB8D6F0a4612CdAaA21dc725
+[contract at goerli.etherscan.io] (https://goerli.etherscan.io/address/0xA097413a69B55fe1aB8D6F0a4612CdAaA21dc725#code)
+
+## Bridge Matic 
+### Mumbai 0xa2D60f2A08fF806446b971b19bAa71677c47a415
+[contract at Mumbai Matic] (https://mumbai.polygonscan.com/address/0xa2D60f2A08fF806446b971b19bAa71677c47a415#code)
+
 
 ## Bridge Bscscan 
-### Bscscan 0xCCb28635ec4662cfaEbFe9A9D3fbAceea9AB7110
-[contract at testnet bscscan] (https://testnet.bscscan.com/address/0xCCb28635ec4662cfaEbFe9A9D3fbAceea9AB7110#code)
+### Bscscan 0xE88702C4B257f30a5929329191ae58A011f35172
+[contract at testnet bscscan] (https://testnet.bscscan.com/address/0xE88702C4B257f30a5929329191ae58A011f35172#code)
 

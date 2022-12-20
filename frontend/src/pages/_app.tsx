@@ -1,6 +1,7 @@
 import '../styles/global.css';
 import '@rainbow-me/rainbowkit/styles.css';
 
+import { ChakraProvider } from '@chakra-ui/react';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { chains, wagmiClient } from 'config/wagmi';
 import type { AppProps } from 'next/app';
@@ -14,11 +15,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   if (!mounted) return null;
 
   return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
-        <Component {...pageProps} />
-      </RainbowKitProvider>
-    </WagmiConfig>
+    <ChakraProvider>
+      <WagmiConfig client={wagmiClient}>
+        <RainbowKitProvider chains={chains}>
+          <Component {...pageProps} />
+        </RainbowKitProvider>
+      </WagmiConfig>
+    </ChakraProvider>
   );
 }
 

@@ -1,13 +1,27 @@
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
-import Image from 'next/image';
+import { useToast } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
+import { useAccount, useNetwork } from 'wagmi';
 
 import { ChangeNetwork } from '../ChangeNetwork';
 import { NetworkTab } from '../NetworkTab';
+import { TokenImg } from '../TokenImg';
 
 export const Bridge = () => {
   const [sendAmount, setSendAmount] = useState<string | number>('');
   const [tokenBalance, setTokenBalance] = useState(0);
+  const toast = useToast();
+  const { address } = useAccount();
+  const { chain } = useNetwork();
+  console.log(chain?.id, 'chain');
+  // const { config } = usePrepareContractWrite({
+  //   address: CONTRACT_ADDRESS,
+  //   abi: YourContract.abi,
+  //   functionName: 'swap',
+  //   args: [state.inputValue],
+  //   enabled: Boolean(state.inputValue),
+  // });
+
   // const [network, setNetwork] = useState('');
   // // const handleFaucet = async () => {};
 
@@ -29,15 +43,7 @@ export const Bridge = () => {
             onChange={(e) => setSendAmount(e.target.value)}
           />
           <div className="absolute right-[12%] mt-2">
-            <div className="flex items-center justify-between text-sm text-white ">
-              <span className="pr-2">bETH</span>
-              <Image
-                src="/assets/ethereum.svg"
-                width={30}
-                height={30}
-                alt="coin"
-              />
-            </div>
+            <TokenImg chainId={chain?.id} />
           </div>
         </div>
       </div>

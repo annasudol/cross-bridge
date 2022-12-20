@@ -1,19 +1,16 @@
-import Image from 'next/image';
 import { useNetwork } from 'wagmi';
+
+import { TokenImg } from '../TokenImg';
 
 export const NetworkTab = () => {
   const { chain } = useNetwork();
 
   return (
-    <p className="flex w-72 justify-start text-white">
-      <span className="mr-2">
-        To {chain?.name === 'Polygon Mumbai' ? 'Ethereum' : 'Polygon'}
+    <p className="flex w-72 items-center justify-start text-white">
+      <span className="mr-2 text-sm">
+        To {chain?.name === 'Polygon Mumbai' ? 'Ethereum' : 'Polygon Mumbai'}
       </span>
-      {chain?.name === 'Polygon Mumbai' ? (
-        <Image src="/assets/ethereum.svg" width={30} height={30} alt="coin" />
-      ) : (
-        <Image src="/assets/matic.svg" width={30} height={30} alt="coin" />
-      )}
+      <TokenImg chainId={chain?.id === 5 ? 8001 : 5} />
     </p>
   );
 };

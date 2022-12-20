@@ -13,10 +13,10 @@ export const Bridge = () => {
   const toast = useToast();
   const { address } = useAccount();
   const { chain } = useNetwork();
-  console.log(chain?.id, 'chain');
-  // const { config } = usePrepareContractWrite({
-  //   address: CONTRACT_ADDRESS,
-  //   abi: YourContract.abi,
+  // console.log(chain?.id, 'chain', contractAddress);
+  // const { config } = useContractRead({
+  //   address: contractAddress.token[chain.id],
+  //   abi: BridgeERC20.abi,
   //   functionName: 'swap',
   //   args: [state.inputValue],
   //   enabled: Boolean(state.inputValue),
@@ -24,6 +24,12 @@ export const Bridge = () => {
 
   // const [network, setNetwork] = useState('');
   // // const handleFaucet = async () => {};
+  // const { data: any, refetch: any } = useContractRead({
+  //   address: CONTRACT_ADDRESS,
+  //   abi: erc721ABI,
+  //   functionName: 'balanceOf',
+  //   args: address ? [address] : undefined,
+  // });
 
   // function handleBridgeSendSearchChain(): void {}
   function handleMaxOut(): void {}

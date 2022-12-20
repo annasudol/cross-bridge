@@ -8,7 +8,7 @@ export const TokenImg: React.FC<TokenProps> = ({ chainId }) => {
   const chainName = chainId === 5 ? 'ethereum' : 'matic';
   return (
     <div className="flex w-20 items-center justify-center">
-      <span className="pr-2 text-sm text-white">
+      <span className="pr-2 text-base text-white">
         {chainId === 5 ? 'eETH' : 'mETH'}
       </span>
       <div className="relative">

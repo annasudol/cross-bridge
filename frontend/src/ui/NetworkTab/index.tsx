@@ -6,11 +6,11 @@ export const NetworkTab = () => {
   const { chain } = useNetwork();
 
   return (
-    <p className="flex w-72 items-center justify-start text-white">
-      <span className="mr-2 text-sm">
+    <div className="flex w-72 items-center justify-start text-white">
+      <span className="mr-2 text-lg">
         To {chain?.name === 'Polygon Mumbai' ? 'Ethereum' : 'Polygon Mumbai'}
       </span>
       <TokenImg chainId={chain?.id === 5 ? 8001 : 5} />
-    </p>
+    </div>
   );
 };

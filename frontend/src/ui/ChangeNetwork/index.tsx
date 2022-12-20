@@ -28,7 +28,9 @@ export const ChangeNetwork = () => {
               if (connected) {
                 return (
                   <div className="mb-4 ml-4 flex w-48 items-center justify-start">
-                    <span className="pr-2 text-white">From</span>
+                    <span className="pr-2 text-lg text-white">
+                      From {chain.id === 5 ? 'eEth' : 'mEth'}
+                    </span>
                     <button
                       onClick={openChainModal}
                       disabled={!connected || chain?.unsupported}

@@ -5,6 +5,7 @@ import "@nomiclabs/hardhat-ethers";
 import "@openzeppelin/hardhat-upgrades";
 import * as dotenv from "dotenv";
 import "./task/swap_redeem"
+
 dotenv.config();
 
 const ALCHEMY_PROJECT_ID = process.env.ALCHEMY_PROJECT_ID || '';
@@ -24,14 +25,14 @@ const config: HardhatUserConfig = {
       allowUnlimitedContractSize: true,
       accounts: { mnemonic: MNEMONIC }
     },
-    bsctestnet: {
+    bscTestnet: {
       url: BSC_TEST_URL || "",
       allowUnlimitedContractSize: true,
       chainId: 97,
       gasPrice: 20000000000,
       accounts: { mnemonic: MNEMONIC }
     },
-    matic: {
+    polygonMumbai: {
       url: MATIC_TEST_URL,
       chainId: 80001,
       gasPrice: 20000000000,
@@ -43,8 +44,12 @@ const config: HardhatUserConfig = {
     currency: "USD",
   },
   etherscan: {
-    apiKey: BSCSCAN_API_KEY
-  },
+    apiKey: {
+      goerli: ETHERSCAN_API_KEY,
+      bscTestnet: BSCSCAN_API_KEY,
+      polygonMumbai: POLYSCAN_API_KEY
+    }
+  }
 };
 
 export default config;

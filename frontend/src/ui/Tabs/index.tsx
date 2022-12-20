@@ -1,10 +1,7 @@
 import { Tab } from '@headlessui/react';
-import { contractAddress } from 'config/constants/chainId';
-import { useEffect, useState } from 'react';
-import { useNetwork } from 'wagmi';
+import { useState } from 'react';
 
-import { useBridgeContract, useTokenContract } from '@/hooks/useContract';
-
+// import { useBridgeContract, useTokenContract } from '@/hooks/useContract';
 import { Bridge } from '../Bridge';
 import { Facet } from '../Facet';
 
@@ -13,17 +10,17 @@ function classNames(...classes: string[]) {
 }
 
 export default function Tabs() {
-  const { chain } = useNetwork();
-  const chainId = chain?.id || 5;
+  // const { chain } = useNetwork();
+  // const chainId = chain?.id || 5;
   const [contract, setContract] = useState();
 
-  const contractBridge = useBridgeContract(
-    contractAddress.Bridge[chainId],
-    chainId
-  );
-  const contractToken = useTokenContract(contractAddress.tokenER20[5], 5);
+  // const contractBridge = useBridgeContract(
+  //   contractAddress.Bridge[chainId],
+  //   chainId
+  // );
+  // const contractToken = useTokenContract(contractAddress.token[5], 5);
 
-  useEffect(() => {}, [contractToken]);
+  // useEffect(() => {}, [contractToken]);
 
   const contractValues = async () => {
     // const balance = await contractToken?.balanceOf(
@@ -31,7 +28,7 @@ export default function Tabs() {
     // );
     // console.log(balance);
     // return balance;
-    console.log(await contractToken?.name());
+    // console.log(await contractToken?.name());
   };
 
   contractValues();

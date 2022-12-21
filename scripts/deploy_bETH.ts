@@ -11,8 +11,6 @@ async function main() {
     console.log(`Token ${symbol} deployed on ${token.address}`);
     saveFrontendFiles(symbol, token.address);
 }
-//npx hardhat verify 0x291846B5bcA36e24232B54e4232537cced31614a Eth_bscTestnet bETH 100 --network bscTestnet
-//npx hardhat run scripts/deploy_mETH.ts --network matic
 
 main().catch((error) => {
     console.error(error);

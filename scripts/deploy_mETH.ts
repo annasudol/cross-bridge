@@ -11,8 +11,7 @@ async function main() {
     await token.deployed();
     console.log(`Token ${symbol} deployed on ${token.address}`);
     saveFrontendFiles(symbol, token.address);
-    //npx hardhat verify 0x37b75bb10EFD59026D45C8b84bD780189BcD2936 Eth_polygonMumbai mETH 100 --network polygonMumbai
-} 
+}
 
 
 main().catch((error) => {

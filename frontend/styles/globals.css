@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -9,9 +13,7 @@
     height: 100vh;
     background: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
 }
-@tailwind components;
-@tailwind utilities;
-@tailwind base;
+
 
 a {
     @apply text-blue-700;

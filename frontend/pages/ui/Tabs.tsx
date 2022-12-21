@@ -9,7 +9,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export function Tabs() {
+export const Tabs = () => {
   // const { chain } = useNetwork();
   // const chainId = chain?.id || 5;
   const [contract, setContract] = useState()

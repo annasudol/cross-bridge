@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import '@rainbow-me/rainbowkit/styles.css'
+// import 'styles/tailwind.css'
 import { useEffect, useState } from 'react'
 import {
   connectorsForWallets,

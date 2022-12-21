@@ -1,5 +1,16 @@
-import { useToast } from '@chakra-ui/react'
 import { ChangeEvent, useEffect, useState } from 'react'
+import {
+  Box,
+  Button,
+  Divider,
+  Heading,
+  Input,
+  Link,
+  ListItem,
+  Text,
+  UnorderedList,
+  useToast,
+} from '@chakra-ui/react'
 import {
   useAccount,
   useNetwork,
@@ -40,17 +51,37 @@ export const Bridge = () => {
     address: TOKEN_ETH_ADDRESS,
     abi: BridgeContract.abi,
     functionName: 'swap',
-    args: [
-      address,
-      sendAmount,
-      0,
-      chain?.id,
-      chain?.id === 5 ? 'gETH' : 'mETH',
-    ],
+    args: [address, 5, 0, chain?.id, chain?.id === 5 ? 'gETH' : 'mETH'],
     enabled: Boolean(chain?.id),
   })
 
   const { data, write } = useContractWrite(config)
+
+  const { isLoading } = useWaitForTransaction({
+    hash: data?.hash,
+    onSuccess(data) {
+      console.log('success data', data)
+      toast({
+        title: 'Transaction Successful',
+        description: (
+          <>
+            <Text>Successfully updated the Greeting!</Text>
+            <Text>
+              <Link
+                href={`https://goerli.etherscan.io/tx/${data?.blockHash}`}
+                isExternal
+              >
+                View on Etherscan
+              </Link>
+            </Text>
+          </>
+        ),
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
+    },
+  })
 
   return (
     <div className="flex flex-col justify-center p-6">

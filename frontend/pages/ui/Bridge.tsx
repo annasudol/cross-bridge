@@ -1,10 +1,26 @@
 import { useToast } from '@chakra-ui/react'
 import { ChangeEvent, useEffect, useState } from 'react'
-import { useAccount, useNetwork } from 'wagmi'
-
+import {
+  useAccount,
+  useNetwork,
+  usePrepareContractWrite,
+  useProvider,
+  useWaitForTransaction,
+  useContractWrite,
+} from 'wagmi'
 import { ChangeNetwork } from '@/ui/ChangeNetwork'
 import { NetworkTab } from '@/ui/NetworkTab'
 import { TokenInfo } from '@/ui/TokenInfo'
+import {
+  BRIDGE_ETH_ADDRESS,
+  BRIDGE_MATIC_ADDRESS,
+  TOKEN_ETH_ADDRESS,
+  TOKEN_MATIC_ADDRESS,
+  token_address,
+} from '@/utils/constants'
+import TokenContract from '../../artifacts/contracts/Token.sol/Token.json'
+import BridgeContract from '../../artifacts/contracts/Bridge.sol/Bridge.json'
+
 export const Bridge = () => {
   const [sendAmount, setSendAmount] = useState<number>()
   const [tokenBalance, setTokenBalance] = useState(0)
@@ -15,11 +31,26 @@ export const Bridge = () => {
   // function handleBridgeSendSearchChain(): void {}
   function handleMaxOut(): void {}
   function handleSend(e: ChangeEvent<HTMLInputElement>): void {
-    // if (Number(e.target.value)) {
-    //   return
-    // }
+    const value = Number(e.target.value)
+    value > 0 && setSendAmount(value)
   }
   useEffect(() => {}, [])
+
+  const { config } = usePrepareContractWrite({
+    address: TOKEN_ETH_ADDRESS,
+    abi: BridgeContract.abi,
+    functionName: 'swap',
+    args: [
+      address,
+      sendAmount,
+      0,
+      chain?.id,
+      chain?.id === 5 ? 'gETH' : 'mETH',
+    ],
+    enabled: Boolean(chain?.id),
+  })
+
+  const { data, write } = useContractWrite(config)
 
   return (
     <div className="flex flex-col justify-center p-6">

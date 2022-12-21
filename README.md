@@ -1,17 +1,21 @@
 # Cross chain bridge
-bridge, which executes the ERC20 tokens between Goerli, Binance Testnet and Matic Mumbai Testnet, and reversely.
-Token eETH gave `AUTHORIZED_ROLE` to Ethereum bridge, to mint and burn tokens
-Token bETH gave `AUTHORIZED_ROLE` to Binance bridge, to mint and burn tokens
-Token mETH gave `AUTHORIZED_ROLE` to Matic bridge, to mint and burn tokens
+app, which executes the ERC20 tokens(eETH, bETH and mETH) between Goerli, Binance Testnet and Matic Mumbai Testnet, and reversely.
 
 The project was built using solidity and hardhat. Contracts are tested with full coverage and deployed on Goerli Ethereum Testnet Network, Binance Testnet Network, Matic Mumbai Testnet Networks
 
 add .env file
-```
+```bash
 npm install
 npx hardhat test
 npx hardhat coverage
 ```
+## Contract deployments on Ethereum Goerli
+```bash
+npx hardhat run scripts/deploy_gETH.ts --network goerli
+npx hardhat run scripts/deploy_bridge_eth.ts --network goerli
+npx hardhat grantRole --bridge [bridgeAddress] --token [eETH address] --network goerli
+```
+
 ## Taks for swap from Ethereum to Binance
 ```tasks
 1. npx hardhat swapETH --to [address] --value [value] --network goerli
@@ -37,30 +41,30 @@ Swap token from Binance to Ethereum
 
 /////------------------------TOKENS----------------------------------//////
 ## Token eETH on Goerli Tesnet 
-### 0xf121DaF9eDdF06F3f7DD56952F6BFd000BFffA61
-[contract at goerli.etherscan.io] (https://goerli.etherscan.io/address/0xf121DaF9eDdF06F3f7DD56952F6BFd000BFffA61#writeContract)
+### 0xD445A2Ab9e782Aa0b9f18dC815dEa4324BE25158
+[contract at goerli.etherscan.io] (https://goerli.etherscan.io/address/0xD445A2Ab9e782Aa0b9f18dC815dEa4324BE25158#code)
 
 ## Token_mETH on Matic Testnet 
-### Matic Mumbai 0xD46B25771dbcd034772D0f2C5dECE94Cd3684435
-[contract at Mumbai Matic] (https://mumbai.polygonscan.com/address/0xD46B25771dbcd034772D0f2C5dECE94Cd3684435#code)
+### Matic Mumbai 0x37b75bb10EFD59026D45C8b84bD780189BcD2936
+[contract at Mumbai Matic] (https://mumbai.polygonscan.com/address/0x37b75bb10EFD59026D45C8b84bD780189BcD2936#code)
 
 ## Token_bETH on bscscan Testnet 
-### bscscan Testnet 0x11E47a0465D3933E372fD4A2854e897934Fd14d7
-[contract at testnet bscscan] (https://testnet.bscscan.com/address/0x11E47a0465D3933E372fD4A2854e897934Fd14d7#code)
+### bscscan Testnet 0x291846B5bcA36e24232B54e4232537cced31614a
+[contract at testnet bscscan] (https://testnet.bscscan.com/address/0x291846B5bcA36e24232B54e4232537cced31614a#code)
 
 /////------------------------BRIDGES----------------------------------//////
 ## Bridge Ethereum
-### Goerli 0xA097413a69B55fe1aB8D6F0a4612CdAaA21dc725
-[contract at goerli.etherscan.io] (https://goerli.etherscan.io/address/0xA097413a69B55fe1aB8D6F0a4612CdAaA21dc725#code)
+### Goerli 0x844b76173E34b17257c16878De57c1BcD8a77B93
+[contract at goerli.etherscan.io] (https://goerli.etherscan.io/address/0x844b76173E34b17257c16878De57c1BcD8a77B93#code)
 
 ## Bridge Matic 
-### Mumbai 0xa2D60f2A08fF806446b971b19bAa71677c47a415
-[contract at Mumbai Matic] (https://mumbai.polygonscan.com/address/0xa2D60f2A08fF806446b971b19bAa71677c47a415#code)
+### Mumbai 0xCCb28635ec4662cfaEbFe9A9D3fbAceea9AB7110
+[contract at Mumbai Matic] (https://mumbai.polygonscan.com/address/0xCCb28635ec4662cfaEbFe9A9D3fbAceea9AB7110#code)
 
 
 ## Bridge Bscscan 
-### Bscscan 0xE88702C4B257f30a5929329191ae58A011f35172
-[contract at testnet bscscan] (https://testnet.bscscan.com/address/0xE88702C4B257f30a5929329191ae58A011f35172#code)
+### Bscscan 0x8d11D5879446483fE856f5B2B7747A3e27551660
+[contract at testnet bscscan] (https://testnet.bscscan.com/address/0x8d11D5879446483fE856f5B2B7747A3e27551660#code)
 
 # Frontend app built with next.js - work in progress
 ```

@@ -2,17 +2,14 @@ import { task } from "hardhat/config";
 import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-ethers";
 import "@typechain/hardhat";
-import ethers from "ethers";
 import * as dotenv from "dotenv"
-import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import signMessage from "../utils/signMessgae";
+import signMessage from "../utils/signMessage";
 
 dotenv.config();
 const TOKEN_ETH_ADDRESS: string = process.env.TOKEN_ETH_ADDRESS!;
 const TOKEN_BSC_ADDRESS: string = process.env.TOKEN_BSC_ADDRESS!;
 const BRIDGE_ETH_ADDRESS: string = process.env.BRIDGE_ETH_ADDRESS!;
 const BRIDGE_BSC_ADDRESS: string = process.env.BRIDGE_BSC_ADDRESS!;
-const VALIDATOR_ADDRESS: string = process.env.VALIDATOR_ADDRESS!;
 const chainID_ETH = 5;
 const chainID_BSC = 97;
 const eETH = "eETH";

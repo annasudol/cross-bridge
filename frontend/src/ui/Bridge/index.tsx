@@ -1,8 +1,10 @@
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
 import { useToast } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
-import { useAccount, useNetwork } from 'wagmi';
+import { contractAddress } from 'config/chainId';
+import { useEffect, useMemo, useState } from 'react';
+import { useAccount, useContractRead, useNetwork } from 'wagmi';
 
+import { BridgeERC20 } from '../../abi/BridgeERC20.json';
 import { ChangeNetwork } from '../ChangeNetwork';
 import { NetworkTab } from '../NetworkTab';
 import { TokenImg } from '../TokenImg';
@@ -13,14 +15,26 @@ export const Bridge = () => {
   const toast = useToast();
   const { address } = useAccount();
   const { chain } = useNetwork();
-  // console.log(chain?.id, 'chain', contractAddress);
-  // const { config } = useContractRead({
-  //   address: contractAddress.token[chain.id],
-  //   abi: BridgeERC20.abi,
-  //   functionName: 'swap',
-  //   args: [state.inputValue],
-  //   enabled: Boolean(state.inputValue),
+  // eslint-disable-next-line consistent-return
+  const CONTRACT_CONFIG = useMemo(() => {
+    if (chain?.id) {
+      return {
+        address: contractAddress.token[chain.id],
+        abi: BridgeERC20.abi,
+      };
+    }
+  }, [chain?.id]);
+  // console.log(chain?.id, 'chain', contractAddress.token[chain.id]);
+  // const { data, isError, isLoading } = useContractRead({
+  //   ...CONTRACT_CONFIG,
+  //   functionName: 'balanceOf',
+  //   args: [address],
   // });
+  const { data, isError, isLoading } = useContractRead({
+    address: '0xecb504d39723b0be0e3a9aa33d646642d1051ee1',
+    abi: BridgeERC20.abi,
+    functionName: 'getHunger',
+  });
 
   // const [network, setNetwork] = useState('');
   // // const handleFaucet = async () => {};

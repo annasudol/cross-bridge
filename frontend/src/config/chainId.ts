@@ -5,11 +5,11 @@ export enum ChainId {
 export const defaultChainId = 5;
 
 export const supportedChains: Array<number> = [5, 80001];
-const TOKEN_ETH_ADDRESS = process.env.TOKEN_ETH_ADDRESS || '';
-const TOKEN_MATIC_ADDRESS = process.env.TOKEN_MATIC_ADDRESS || '';
+const TOKEN_ETH_ADDRESS = process.env.NEXT_PUBLIC_TOKEN_ETH_ADDRESS || '';
+const TOKEN_MATIC_ADDRESS = process.env.NEXT_PUBLIC_TOKEN_MATIC_ADDRESS || '';
 
-const BRIDGE_ETH_ADDRESS = process.env.BRIDGE_ETH_ADDRESS || '';
-const BRIDGE_MATIC_ADDRESS = process.env.BRIDGE_MATIC_ADDRESS || '';
+const BRIDGE_ETH_ADDRESS = process.env.NEXT_PUBLIC_BRIDGE_ETH_ADDRESS || '';
+const BRIDGE_MATIC_ADDRESS = process.env.NEXT_PUBLIC_BRIDGE_MATIC_ADDRESS || '';
 
 export const rpcUrls = {
   5: 'https://eth-goerli.g.alchemy.com/v2/eVmmI6NjfF6MjOrgx4pbuURWQcIQ9Dpc',

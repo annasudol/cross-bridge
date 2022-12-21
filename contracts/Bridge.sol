@@ -1,8 +1,8 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.9;
+//SPDX-License-Identifier: UNLICENSED
+
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
-import "./BridgeERC20.sol";
-import "hardhat/console.sol";
+import "./Token.sol";
+pragma solidity ^0.8.9;
 
 contract Bridge {
     using ECDSA for bytes32;
@@ -24,7 +24,7 @@ contract Bridge {
     mapping(address => bytes) public signatures;
 
     modifier checkValidERC20(string memory symbol) {
-        require(keccak256(abi.encodePacked(BridgeERC20(token).symbol())) ==
+        require(keccak256(abi.encodePacked(Token(token).symbol())) ==
                 keccak256(abi.encodePacked(symbol)), "non supported erc20 token");
         _;
     }
@@ -37,13 +37,13 @@ contract Bridge {
     function facet() public {
         require(faceded[msg.sender] <= (block.timestamp - 1 days), "we can only send facet every 24 hours");
         faceded[msg.sender] = block.timestamp;
-        BridgeERC20(token).mint(msg.sender, 1 ether);
+        Token(token).mint(msg.sender, 1 ether);
     }
 
     //Swap(): transfers tokens from sender to the contract
     function swap(address to, uint256 amount, uint256 nonce, uint256 chainId, string memory symbol)
         checkValidERC20(symbol) chainIdIsSupported(chainId) public {
-            BridgeERC20(token).burn(msg.sender, amount);
+            Token(token).burn(msg.sender, amount);
             emit SwapInitialized(msg.sender, to, amount, nonce, chainId, symbol);
     }
 
@@ -57,7 +57,7 @@ contract Bridge {
         require(_verify(message, signature), "invalid signature");
         redemeed[message]=true;
 
-        BridgeERC20(token).mint(to, amount);
+        Token(token).mint(to, amount);
         emit RedeemInitialized(from, to, amount, nonce, _chainId, symbol);
     }
 

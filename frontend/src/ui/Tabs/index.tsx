@@ -1,39 +1,19 @@
 import { Tab } from '@headlessui/react';
-import { useState } from 'react';
 
-// import { useBridgeContract, useTokenContract } from '@/hooks/useContract';
 import { Bridge } from '../Bridge';
-import { Facet } from '../Facet';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
 export default function Tabs() {
-  // const { chain } = useNetwork();
-  // const chainId = chain?.id || 5;
-  const [contract, setContract] = useState();
+  // const [contract, setContract] = useState();
 
-  // const contractBridge = useBridgeContract(
-  //   contractAddress.Bridge[chainId],
-  //   chainId
-  // );
-  // const contractToken = useTokenContract(contractAddress.token[5], 5);
-
-  // useEffect(() => {}, [contractToken]);
-
-  const contractValues = async () => {
-    // const balance = await contractToken?.balanceOf(
-    //   '0x80dD5aD6B8775c4E31C999cA278Ef4D035717872'
-    // );
-    // console.log(balance);
-    // return balance;
-    // console.log(await contractToken?.name());
-  };
+  const contractValues = async () => {};
 
   contractValues();
 
-  const categories = ['Bridge', 'Facet'];
+  const categories = ['Bridge', 'Redeem'];
   return (
     <div className="mt-16 w-full max-w-xl py-16 sm:px-0">
       <Tab.Group>
@@ -62,7 +42,7 @@ export default function Tabs() {
               )}
             >
               <button onClick={contractValues}>clis</button>
-              {idx === 1 ? <Facet /> : <Bridge />}
+              {idx === 1 ? <p>Redeem</p> : <Bridge />}
             </Tab.Panel>
           ))}
         </Tab.Panels>

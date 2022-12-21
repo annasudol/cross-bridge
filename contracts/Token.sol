@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.17;
+pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "hardhat/console.sol";
 
-contract BridgeERC20 is ERC20, AccessControl {
+contract Token is ERC20, AccessControl {
     bytes32 public constant AUTHORIZED_ROLE = keccak256("AUTHORIZED_ROLE");
 
     constructor(string memory name, string memory symbol, uint256 initialSupply) ERC20(name, symbol) {

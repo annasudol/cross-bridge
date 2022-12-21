@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import { Bridge__factory, BridgeERC20__factory, Bridge, BridgeERC20 } from "../typechain-types";
+import { Bridge__factory, Token__factory, Bridge, Token } from "../typechain-types";
 
 describe("Bridge", function () {
     const chainID_ETH = 5;
@@ -9,9 +9,9 @@ describe("Bridge", function () {
     const eETH = "eETH";
     const bETH = "bETH";
     let Bridge: Bridge__factory;
-    let BridgeERC20: BridgeERC20__factory;
-    let token_bETH: BridgeERC20;
-    let token_eETH: BridgeERC20;
+    let Token: Token__factory;
+    let token_bETH: Token;
+    let token_eETH: Token;
 
     let bridge_ETH: Bridge;
     let bridge_BSC: Bridge;
@@ -24,9 +24,9 @@ describe("Bridge", function () {
 
     beforeEach(async function () {
         [acc0, acc1, validator] = await ethers.getSigners();
-        BridgeERC20 = await ethers.getContractFactory("BridgeERC20");
-        token_bETH = await BridgeERC20.deploy('token_bETH', bETH, 100);
-        token_eETH = await BridgeERC20.deploy('token_eETH', eETH, 100);
+        Token = await ethers.getContractFactory("Token");
+        token_bETH = await Token.deploy('token_bETH', bETH, 100);
+        token_eETH = await Token.deploy('token_eETH', eETH, 100);
         Bridge = await ethers.getContractFactory("Bridge");
 
         //deployed bridge used to send token from binance to ethereum

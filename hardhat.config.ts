@@ -5,7 +5,7 @@ import "@nomiclabs/hardhat-ethers";
 import "@openzeppelin/hardhat-upgrades";
 import * as dotenv from "dotenv";
 import "./task/swap_redeem"
-
+import "./task/grant_roles"
 dotenv.config();
 
 const ALCHEMY_PROJECT_ID = process.env.ALCHEMY_PROJECT_ID || '';

@@ -1,11 +1,8 @@
 import Image from 'next/image'
-import { useNetwork } from 'wagmi'
 interface TokenInfoProps {
   chainId?: number
 }
 export const TokenInfo: React.FC<TokenInfoProps> = ({ chainId }) => {
-  const chainName = chainId === 5 ? 'ethereum' : 'matic'
-
   return (
     <div className="flex w-20 items-center justify-center">
       <span className="pr-2 text-base text-white">

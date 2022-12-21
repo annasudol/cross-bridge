@@ -1,12 +1,12 @@
 import { useToast } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useAccount, useNetwork } from 'wagmi'
 
 import { ChangeNetwork } from '@/ui/ChangeNetwork'
 import { NetworkTab } from '@/ui/NetworkTab'
 import { TokenInfo } from '@/ui/TokenInfo'
 export const Bridge = () => {
-  const [sendAmount, setSendAmount] = useState<string | number>('')
+  const [sendAmount, setSendAmount] = useState<number>()
   const [tokenBalance, setTokenBalance] = useState(0)
   const toast = useToast()
   const { address } = useAccount()
@@ -14,7 +14,11 @@ export const Bridge = () => {
 
   // function handleBridgeSendSearchChain(): void {}
   function handleMaxOut(): void {}
-
+  function handleSend(e: ChangeEvent<HTMLInputElement>): void {
+    // if (Number(e.target.value)) {
+    //   return
+    // }
+  }
   useEffect(() => {}, [])
 
   return (
@@ -25,9 +29,11 @@ export const Bridge = () => {
           <input
             placeholder=""
             className="w-[100%] rounded-md bg-gray-600 bg-opacity-20 p-2 py-3 text-base text-white"
-            type="text"
+            type="number"
+            pattern="[0-9]*"
             value={sendAmount}
-            onChange={(e) => setSendAmount(e.target.value)}
+            min={0.01}
+            onChange={(e) => handleSend(e)}
           />
           <div className="absolute right-[12%] mt-2">
             <TokenInfo chainId={chain?.id} />

@@ -14,7 +14,7 @@ import { publicProvider } from 'wagmi/providers/public'
 import { polygonMumbai, goerli } from 'wagmi/chains'
 const ALCHEMY_API_KEY = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY || ''
 
-const { provider, webSocketProvider, chains } = configureChains(
+const { provider, chains } = configureChains(
   [polygonMumbai, goerli],
   [
     alchemyProvider({
@@ -39,7 +39,6 @@ const wagmiClient = createClient({
   autoConnect: true,
   connectors,
   provider,
-  webSocketProvider,
 })
 
 export default function App({ Component, pageProps }: AppProps) {

@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { WalletConnect } from 'pages/ui/ConnectWallet'
 import { AppConfig } from '@/utils/AppConfig'
-import { Container, Flex, Link, SimpleGrid, Text } from '@chakra-ui/react'
+
 type IMainProps = {
   meta: ReactNode
   children: ReactNode

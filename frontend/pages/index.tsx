@@ -7,12 +7,14 @@ const Home = () => {
     <Main
       meta={
         <Meta
-          title="Cross chain ETH-MATIC Bridge"
+          title="Cross-chain Bridge"
           description="Crypto cross-chain bridge between Ethereum and Polygon networks"
         />
       }
     >
-      <div className="flex justify-center">{/* <Tabs /> */}</div>
+      <div className="flex justify-center">
+        <Tabs />{' '}
+      </div>
     </Main>
   )
 }

@@ -18,7 +18,7 @@ export const Tabs = () => {
 
   contractValues()
 
-  const categories = ['Bridge', 'Facet']
+  const categories = ['Bridge', 'Redeem']
   return (
     <div className="mt-16 w-full max-w-xl py-16 sm:px-0">
       <Tab.Group>

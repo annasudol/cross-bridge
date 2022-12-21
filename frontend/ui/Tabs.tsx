@@ -9,7 +9,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Tabs() {
+export function Tabs() {
   // const { chain } = useNetwork();
   // const chainId = chain?.id || 5;
   const [contract, setContract] = useState()

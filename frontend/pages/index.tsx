@@ -1,8 +1,22 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '../styles/Home.module.css'
+import { Meta } from '@/layouts/Meta'
+import { Main } from '@/templates/Main'
+import { Tabs } from '@/ui/Tabs'
 
-export default function Home() {
-  return <></>
+const Index = () => {
+  return (
+    <Main
+      meta={
+        <Meta
+          title="Cross chain ETH-MATIC Bridge"
+          description="Crypto cross-chain bridge between Ethereum and Polygon networks"
+        />
+      }
+    >
+      <div className="flex justify-center">
+        <Tabs />
+      </div>
+    </Main>
+  )
 }
+
+export default Index

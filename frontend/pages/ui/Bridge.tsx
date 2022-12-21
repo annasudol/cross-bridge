@@ -31,57 +31,54 @@ import {
 } from '@/utils/constants'
 import TokenContract from '../../artifacts/contracts/Token.sol/Token.json'
 import BridgeContract from '../../artifacts/contracts/Bridge.sol/Bridge.json'
+import { ethers } from 'ethers'
+import { Token } from '../../typechain-types'
 
 export const Bridge = () => {
   const [sendAmount, setSendAmount] = useState<number>()
   const [tokenBalance, setTokenBalance] = useState(0)
+  const provider = useProvider()
   const toast = useToast()
   const { address } = useAccount()
   const { chain } = useNetwork()
 
   // function handleBridgeSendSearchChain(): void {}
-  function handleMaxOut(): void {}
-  function handleSend(e: ChangeEvent<HTMLInputElement>): void {
-    const value = Number(e.target.value)
-    value > 0 && setSendAmount(value)
+  function handleMaxOut(): void {
+    setSendAmount(tokenBalance)
   }
-  useEffect(() => {}, [])
+  function handleSend(e: ChangeEvent<HTMLInputElement>): void {
+    const value = e.target.value.replace(/\+|-/gi, '')
+    const value_num = Number(value)
+    value_num > 0 && value_num <= tokenBalance && setSendAmount(value_num)
+  }
+  useEffect(() => {
+    async function fetchContractGreeting() {
+      if (provider) {
+        const contract = new ethers.Contract(
+          TOKEN_ETH_ADDRESS,
+          TokenContract.abi,
+          provider
+        ) as Token
+        try {
+          const balanceBN = await contract.balanceOf(address!!)
+          const balance = ethers.utils.formatUnits(balanceBN)
+          setTokenBalance(Number(balance))
+        } catch (err) {
+          // eslint-disable-next-line no-console
+          console.log('Error: ', err)
+        }
+      }
+    }
+    fetchContractGreeting()
+  }, [])
 
-  const { config } = usePrepareContractWrite({
-    address: TOKEN_ETH_ADDRESS,
-    abi: BridgeContract.abi,
-    functionName: 'swap',
-    args: [address, 5, 0, chain?.id, chain?.id === 5 ? 'gETH' : 'mETH'],
-    enabled: Boolean(chain?.id),
-  })
-
-  const { data, write } = useContractWrite(config)
-
-  const { isLoading } = useWaitForTransaction({
-    hash: data?.hash,
-    onSuccess(data) {
-      console.log('success data', data)
-      toast({
-        title: 'Transaction Successful',
-        description: (
-          <>
-            <Text>Successfully updated the Greeting!</Text>
-            <Text>
-              <Link
-                href={`https://goerli.etherscan.io/tx/${data?.blockHash}`}
-                isExternal
-              >
-                View on Etherscan
-              </Link>
-            </Text>
-          </>
-        ),
-        status: 'success',
-        duration: 5000,
-        isClosable: true,
-      })
-    },
-  })
+  // const { config } = usePrepareContractWrite({
+  //   address: TOKEN_ETH_ADDRESS,
+  //   abi: BridgeContract.abi,
+  //   functionName: 'swap',
+  //   args: [address, 5, 0, chain?.id, chain?.id === 5 ? 'gETH' : 'mETH'],
+  //   enabled: Boolean(chain?.id),
+  // })
 
   return (
     <div className="flex flex-col justify-center p-6">
@@ -90,11 +87,11 @@ export const Bridge = () => {
         <div className="flex flex-row p-2">
           <input
             placeholder=""
-            className="w-[100%] rounded-md bg-gray-600 bg-opacity-20 p-2 py-3 text-base text-white"
-            type="number"
-            pattern="[0-9]*"
+            className="w-[100%] rounded-md bg-gray-600 bg-opacity-20 px-4 py-3 text-base text-white outline-none"
+            type="text"
+            pattern="^-?[0-9]\d*\.?\d*$"
             value={sendAmount}
-            min={0.01}
+            max={tokenBalance}
             onChange={(e) => handleSend(e)}
           />
           <div className="absolute right-[12%] mt-2">
@@ -106,7 +103,9 @@ export const Bridge = () => {
         <NetworkTab />
         <div className="text-base text-gray-200">
           <button onClick={handleMaxOut}>
-            <p className="underline underline-offset-1">Max: {tokenBalance}</p>
+            <p className="underline underline-offset-1">
+              Max: {tokenBalance.toFixed(2)}
+            </p>
           </button>
         </div>
       </div>

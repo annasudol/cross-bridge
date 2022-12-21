@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import Image from 'next/image'
-
+import { TokenInfo } from './TokenInfo'
 export const ChangeNetwork = () => {
   return (
     <ConnectButton.Custom>
@@ -27,10 +27,12 @@ export const ChangeNetwork = () => {
             {((): any => {
               if (connected) {
                 return (
-                  <div className="mb-4 ml-4 flex w-48 items-center justify-start">
-                    <span className="pr-2 text-lg text-white">
-                      From {chain.id === 5 ? 'eEth' : 'mEth'}
-                    </span>
+                  <div className="mb-4 ml-4 flex max-w-max items-center justify-start">
+                    <div className="text-lg text-white flex mr-4">
+                      <span className="mr-2"> From </span>
+                      <TokenInfo chainId={chain.id} />
+                    </div>
+
                     <button
                       onClick={openChainModal}
                       disabled={!connected || chain?.unsupported}

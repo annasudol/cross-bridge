@@ -9,7 +9,7 @@ export const NetworkTab = () => {
       <span className="mr-2 text-lg">
         To {chain?.name === 'Polygon Mumbai' ? 'Ethereum' : 'Polygon Mumbai'}
       </span>
-      <TokenInfo />
+      <TokenInfo chainId={chain?.id === 80001 ? 5 : 80001} />
     </div>
   )
 }

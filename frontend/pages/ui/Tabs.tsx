@@ -1,6 +1,6 @@
 import { Tab } from '@headlessui/react'
 import { useState } from 'react'
-
+import { Bridge } from '@/ui/Bridge'
 // import { useBridgeContract, useTokenContract } from '@/hooks/useContract';
 // import { Bridge } from '../Bridge'
 // import { Facet } from '../Facet'
@@ -46,8 +46,7 @@ export const Tabs = () => {
                 'bg-blue-900 focus:outline-none'
               )}
             >
-              <button onClick={contractValues}>clis</button>
-              {/* {idx === 1 ? <Facet /> : <Bridge />} */}
+              {idx === 1 ? <p>redeem</p> : <Bridge />}
             </Tab.Panel>
           ))}
         </Tab.Panels>

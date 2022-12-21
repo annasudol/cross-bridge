@@ -2,8 +2,9 @@ import { useToast } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useAccount, useNetwork } from 'wagmi'
 
-import { ChangeNetwork, NetworkTab, TokenInfo } from '@/ui/index'
-
+import { ChangeNetwork } from '@/ui/ChangeNetwork'
+import { NetworkTab } from '@/ui/NetworkTab'
+import { TokenInfo } from '@/ui/TokenInfo'
 export const Bridge = () => {
   const [sendAmount, setSendAmount] = useState<string | number>('')
   const [tokenBalance, setTokenBalance] = useState(0)
@@ -29,7 +30,7 @@ export const Bridge = () => {
             onChange={(e) => setSendAmount(e.target.value)}
           />
           <div className="absolute right-[12%] mt-2">
-            <TokenInfo />
+            <TokenInfo chainId={chain?.id} />
           </div>
         </div>
       </div>

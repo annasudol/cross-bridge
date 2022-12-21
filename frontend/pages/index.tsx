@@ -1,6 +1,7 @@
 import { Meta } from '@/layouts/Meta'
 import { Main } from 'pages/templates/Main'
 import { Tabs } from 'pages/ui/Tabs'
+import { ModalUI } from '@/ui/ModalUI'
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       }
     >
       <div className="flex justify-center">
+        <ModalUI />
         <Tabs />{' '}
       </div>
     </Main>

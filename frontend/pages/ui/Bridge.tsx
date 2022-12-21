@@ -55,7 +55,7 @@ export const Bridge = () => {
     async function fetchContractGreeting() {
       if (provider) {
         const contract = new ethers.Contract(
-          TOKEN_ETH_ADDRESS,
+          token_address(chain?.id || 5) as string,
           TokenContract.abi,
           provider
         ) as Token
@@ -73,11 +73,17 @@ export const Bridge = () => {
   }, [])
 
   // const { config } = usePrepareContractWrite({
-  //   address: TOKEN_ETH_ADDRESS,
+  //   address: BRIDGE_ETH_ADDRESS,
   //   abi: BridgeContract.abi,
   //   functionName: 'swap',
-  //   args: [address, 5, 0, chain?.id, chain?.id === 5 ? 'gETH' : 'mETH'],
-  //   enabled: Boolean(chain?.id),
+  //   args: [
+  //     '0x80dD5aD6B8775c4E31C999cA278Ef4D035717872',
+  //     1,
+  //     0,
+  //     chain?.id,
+  //     chain?.id === 5 ? 'gETH' : 'mETH',
+  //   ],
+  //   enabled: Boolean(chain?.id && provider),
   // })
 
   return (

@@ -43,12 +43,6 @@ const config: HardhatUserConfig = {
     enabled: false,
     currency: "USD",
   },
-  paths: {
-    artifacts: './frontend/artifacts',
-  },
-  typechain: {
-    outDir: './frontend/types/typechain',
-  },
   etherscan: {
     apiKey: {
       goerli: ETHERSCAN_API_KEY,

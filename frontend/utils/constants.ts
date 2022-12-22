@@ -21,3 +21,18 @@ export const bridge_address = (id: number): string => {
     }
     return address[id]
 };
+
+export const etherscan_address = (id: number, blockHash: string): string => {
+    const address: { [_id: number]: string } = {
+        5: `https://goerli.etherscan.io/tx/${blockHash}`,
+        80001: `https://mumbai.polygonscan.com/tx/${blockHash}`
+    }
+    return address[id]
+};
+export const token_name = (id: number): string => {
+    const name: { [_id: number]: string } = {
+        5: 'gETH',
+        80001: 'mETH'
+    }
+    return name[id]
+};

@@ -1,16 +1,5 @@
 import { ChangeEvent, useEffect, useState } from 'react'
-import {
-  Box,
-  Button,
-  Divider,
-  Heading,
-  Input,
-  Link,
-  ListItem,
-  Text,
-  UnorderedList,
-  useToast,
-} from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react'
 import {
   useAccount,
   useNetwork,
